@@ -1,0 +1,13 @@
+{
+  "name": "nv-plugins",
+  "owner": {
+    "name": "novibe-org"
+  },
+  "plugins": [
+    {
+      "name": "novibe",
+      "source": "./plugins/novibe",
+      "description": "NoVibe — be the driver, not the passenger: architecture → feature spec → TDD as orchestrated skills."
+    }
+  ]
+}
