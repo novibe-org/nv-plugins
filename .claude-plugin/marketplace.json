@@ -1,5 +1,6 @@
 {
   "name": "nv-plugins",
+  "description": "NoVibe — the development method as Claude Code plugins: be the driver, not the passenger.",
   "owner": {
     "name": "novibe-org"
   },
