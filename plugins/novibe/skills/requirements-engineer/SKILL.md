@@ -1,32 +1,25 @@
 ---
 name: requirements-engineer
-description: Capture what to build as an executable feature spec — business scenarios (outcomes, not mechanism) with Examples tables. Use before implementing a feature, to pin intent as acceptance criteria. On its own, or as the spec step of the `novibe` flow.
+description: Turn a rough idea into a Gherkin requirements spec for one small vertical slice.
 ---
 
 # Requirements Engineer
 
-Intent is the work. Requirements are the most expensive thing to get wrong — the cost to fix
-multiplies the later you catch it — and a vague ask becomes generated code that isn't what
-you meant. So pin **what to build and why** as an **executable spec** before any code: it is
-the source of truth for "done," and it becomes the test.
+**In:** a rough idea.
+**Out:** a **Gherkin** spec at `docs/requirements/<epic>/<feature>.feature`.
 
-**No internal planning docs.** Don't stash intent in private planning files (e.g.
-`.claude/plan`) — capture it *as the feature spec*: a sharable, living artifact.
+**Build the right thing** — what gets built is what's actually needed, before anyone builds it
+*right*. **Requirements come from the user — elicit them, don't invent them.** Work top-down,
+just-in-time; never specify the whole world.
 
-## Write the feature spec (Gherkin)
-
-- **Standard location**: `tests/behavior/features/<name>.feature` — one feature per file,
-  with an `FS-<n>` id.
-- **Business outcome, not mechanism.** Say what the user/operator gets, never how it's built
-  (no endpoints, status codes, class names). *"It is refused as unauthenticated"*, not
-  *"returns 401"*.
-- **Frame the why**: a short problem statement + `As a … I want … so that …`.
-- **Structure**: `Background` for shared setup; a `Scenario` per acceptance case;
-  **`Scenario Outline` + `Examples` tables** when the same behaviour varies by data.
-- **One outcome per scenario**, readable by a non-engineer.
-- Tag not-yet-automated scenarios `@wip`.
+1. **Get the epic** — the higher-level *why*: read `docs/requirements/<epic>/epic.md` if it
+   exists, else sketch it *good enough* with the user.
+2. **Pick one feature** — a small **vertical slice** that advances the epic; detail only this.
+3. **Write the scenarios** — business outcomes, not mechanism (*"refused as unauthenticated"*, not
+   *"returns 401"*); `As a … I want … so that …`; a `Scenario` per case; `Scenario Outline` +
+   `Examples` when data varies.
+**No internal planning docs** — the spec is the sharable, living artifact, not a `.claude/plan`.
 
 ## Done when
 
-You and the driver agree the scenarios capture the intended behaviour — the spec reads as the
-contract for "done" in business language, with `Examples` covering the meaningful variations.
+The driver agrees the Gherkin scenarios capture the intended behaviour for one small vertical slice.

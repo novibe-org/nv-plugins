@@ -1,52 +1,33 @@
 ---
 name: architect
-description: Design a change in the C4 architecture model before writing code, and record significant decisions as terse ADRs. Use when a change adds or alters components, boundaries, integrations, or cross-cutting decisions — on its own, or as the design step of the `novibe` flow.
+description: Turn a Gherkin spec into a C4 architecture model for one slice — high-level design and flows. Terse ADR only for a crucial cross-cutting decision.
 ---
 
 # Architect
 
-Design before code. The **model is the crucial artifact** — the source of truth that carries
-the architecture into the implementation step and into the agent's working context.
-**Diagrams are secondary**: generated *from* the model, purely for the humans who later need
-to understand the software. That's why we use **LikeC4** — it separates model and view
-cleanly, and emits Mermaid that renders directly in Markdown/GitHub. Invest in the model;
-treat the views as derived output.
+**In:** the Gherkin spec at `docs/requirements/<epic>/<feature>.feature`.
+**Out:** a **C4 model** at `docs/architecture/current/` (LikeC4).
 
-**Never output code.** The architect works only at the model/design level — C4 elements,
-relations, and (rarely) a terse ADR. No implementation code, snippets, or pseudo-code; that
-is the developer's job.
+Design it right — turn the spec into a clear design. The **model is the crucial artifact**: the
+source of truth that carries the architecture into implementation and into the agent's context.
+**Diagrams are secondary** — generated *from* the model, for the humans who later read it. That's
+why we use **LikeC4**: it separates model and view, and emits Mermaid that renders in Markdown/GitHub.
 
-**No internal planning docs.** Don't stash the design in private planning files (e.g.
-`.claude/plan`) — capture it *as the C4 model*: a sharable, living artifact.
+**Never output code** — model/design level only; implementation is the developer's job.
+**No internal planning docs** — the design lives in the C4 model, a sharable, living artifact.
 
-## Model the architecture (LikeC4)
-
-- **Standard location**: `docs/architecture/current/` and `docs/architecture/vision/`, each
-  a LikeC4 project (`likec4.config.json` + `model.c4` + `views.c4`).
-- **Never hand-edit a generated `VIEWS.md`** — change the model and regenerate.
-- **Split files**: `model.c4` (elements + relations) and `views.c4` (views). Across files,
-  reference nested elements by full path (e.g. `system.container.component`).
-- **`current/` vs `vision/`**: `current/` = what's built (edit it for the increment you're
-  building); `vision/` = the target/direction.
-- **Extend, don't rewrite** — add only the elements and relations the change introduces.
-- **Regenerate only once you and the driver agree on the architecture** — not after every
-  edit. Iterate on the `.c4` together; when you both agree it's settled, run the standard
-  command `pnpm gen:diagrams` (script: `scripts/gen-diagrams.ts`) to refresh the views.
-
-## ADRs are optional and rare — don't write books
-
-**Default to no ADR.** Most design lives in the model. Write one only for a **crucial,
-cross-cutting** decision: a new integration pattern, a security/boundary invariant,
-build-vs-reuse, repo structure. **Never package a feature as an ADR** — features belong in a
-feature spec, not in decision records.
-
-When one is warranted:
-
-- **MADR-lite**: `Context` (why), `Options` (one line each), `Decision` (bullets),
-  `Consequences` (bullets). ~30–40 lines. No long prose, no embedded trees.
-- Next number in `docs/adrs/`; one decision per ADR; link related ones.
+1. **Locate the model** — `docs/architecture/current/` (built) + `vision/` (target), each a LikeC4
+   project (`likec4.config.json` + `model.c4` + `views.c4`). Reference nested elements across files
+   by full path (e.g. `system.container.component`).
+2. **Design to the spec** — extend `current/` for the slice: add only the elements and relations it
+   introduces. If there's no higher-level architecture yet, sketch the `vision/` HLD *good enough* first.
+3. **Agree, then regenerate** — iterate on the `.c4` with the driver; when you both agree it's
+   settled, run `pnpm gen:diagrams`. Never hand-edit a generated `VIEWS.md`.
+4. **ADR only if warranted** — a crucial cross-cutting decision (integration pattern,
+   security/boundary invariant, build-vs-reuse, repo structure): terse MADR-lite (~30–40 lines),
+   next number in `docs/adrs/`. Default to none; never package a feature as an ADR.
 
 ## Done when
 
-You and the driver agree on the model, the views are regenerated, and an ADR exists **only
-if** a crucial cross-cutting decision was actually made — often there is none.
+You and the driver agree the model meets the spec, the views are regenerated, and an ADR exists
+only if a crucial decision was actually made — often none.

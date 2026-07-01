@@ -1,40 +1,32 @@
 ---
 name: developer
-description: Implement a change test-first — red → green → refactor — driving the feature spec's business scenarios to passing tests. Use when building a feature whose behaviour is specified. On its own, or as the implementation step of the `novibe` flow.
+description: Implement a change test-first — red → green → refactor — turning the spec's scenarios into passing tests. Use when building a feature whose behaviour is specified.
 ---
 
 # Developer
 
-Prove it right. Write the test **first** so you author the proof of correctness instead of
-auditing generated code. The feature spec's scenarios are the acceptance tests; add plain
-unit tests for building blocks.
+**In:** the Gherkin spec (`docs/requirements/<epic>/<feature>.feature`) + the C4 model (`docs/architecture/current/`).
+**Out:** **working code** for the feature slice.
 
-## The loop (any language)
+**Prove it right** — write the test **first**, so you author the proof of correctness instead of
+auditing generated code.
 
-1. **Pick the next behaviour** — the next scenario from the feature spec, or one unit case.
-2. **Write the test, run it → RED.** Confirm it fails for the *right* reason (the behaviour
-   is missing, not a typo).
-3. **Minimal implementation → GREEN.** Write only enough to pass; nothing speculative.
+1. **Pick the next scenario** from the spec.
+2. **Write the test, run it → RED** — confirm it fails for the *right* reason (behaviour missing,
+   not a typo).
+3. **Minimal implementation → GREEN** — only enough to pass.
 4. **Refactor** with the test green — clean up, remove duplication.
-5. Repeat until every scenario passes (or is tagged `@wip`).
+5. **Repeat** until every scenario passes (or is left pending).
 
-Map **business scenarios** (the Gherkin `.feature`) to step defs that drive the *real*
-system; keep them in the feature's language of outcomes, not internals.
+**What to test** — the spec's scenarios (acceptance), plus unit tests for pure functions worth
+verifying in isolation. Not everything, and never external code (libraries, frameworks, third-party APIs).
 
-**Code explains itself.** Prefer clear names and structure over comments. Add documentation
-only where the code's *intention* is genuinely hard to grasp — a gotcha, a non-obvious *why*
-— never restate what the code already says.
+**Follow the project's test setup** (`CLAUDE.md` / existing tests) for how tests are written and run.
 
-## Tooling by stack
-
-- **Python** — `pytest` + `pytest-bdd`; features in `tests/behavior/features/`, step defs in
-  `tests/behavior/`, unit tests in `tests/unit/`. Run `uv run pytest` (lint `uv run ruff
-  check`, types `uv run ty check`).
-- **TypeScript** — `vitest` + `@amiceli/vitest-cucumber`; same `tests/behavior/` layout. Run
-  `pnpm test`. For a Cloudflare Worker, drive it black-box over HTTP via `wrangler`'s dev API
-  (feature files load in Node, not inside `workerd`).
+**Code explains itself** — prefer clear names and structure over comments; document only where the
+*intention* is genuinely hard to grasp, never what the code already says.
 
 ## Done when
 
-Every scenario in the spec is green (or explicitly `@wip`), the suite passes, and the
+Every scenario in the spec is green (or explicitly pending), the suite passes, and the
 implementation is the minimum that satisfies it — no speculative code.
