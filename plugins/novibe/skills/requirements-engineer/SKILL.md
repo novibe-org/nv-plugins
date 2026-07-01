@@ -18,6 +18,12 @@ just-in-time; never specify the whole world.
 3. **Write the scenarios** — business outcomes, not mechanism (*"refused as unauthenticated"*, not
    *"returns 401"*); `As a … I want … so that …`; a `Scenario` per case; `Scenario Outline` +
    `Examples` when data varies.
+4. **Open the feature branch** — create `feat/<slug>` and commit the spec to it.
+
+**Layout** — one feature = one `.feature` in the epic's folder (`docs/requirements/<epic>/`);
+the **filename is a kebab-case slug** — the feature's stable handle. Features belong to the epic
+**by folder** (no cross-refs); `epic.md` holds the *why*.
+
 **No internal planning docs** — the spec is the sharable, living artifact, not a `.claude/plan`.
 
 ## Done when

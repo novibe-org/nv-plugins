@@ -21,8 +21,9 @@ why we use **LikeC4**: it separates model and view, and emits Mermaid that rende
    by full path (e.g. `system.container.component`).
 2. **Design to the spec** — extend `current/` for the slice: add only the elements and relations it
    introduces. If there's no higher-level architecture yet, sketch the `vision/` HLD *good enough* first.
-3. **Agree, then regenerate** — iterate on the `.c4` with the driver; when you both agree it's
-   settled, run `pnpm gen:diagrams`. Never hand-edit a generated `VIEWS.md`.
+3. **Agree, regenerate, commit** — iterate on the `.c4` with the driver; when you both agree it's
+   settled, run `pnpm gen:diagrams` and commit the model to the `feat/<slug>` branch. Never
+   hand-edit a generated `VIEWS.md`.
 4. **ADR only if warranted** — a crucial cross-cutting decision (integration pattern,
    security/boundary invariant, build-vs-reuse, repo structure): terse MADR-lite (~30–40 lines),
    next number in `docs/adrs/`. Default to none; never package a feature as an ADR.

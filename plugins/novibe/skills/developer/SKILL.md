@@ -18,6 +18,8 @@ auditing generated code.
 4. **Refactor** with the test green — clean up, remove duplication.
 5. **Repeat** until every scenario passes (or is left pending).
 
+Commit the code to the `feat/<slug>` branch as you go (each green step).
+
 **What to test** — the spec's scenarios (acceptance), plus unit tests for pure functions worth
 verifying in isolation. Not everything, and never external code (libraries, frameworks, third-party APIs).
 
