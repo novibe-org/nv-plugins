@@ -21,6 +21,10 @@ unit tests for building blocks.
 Map **business scenarios** (the Gherkin `.feature`) to step defs that drive the *real*
 system; keep them in the feature's language of outcomes, not internals.
 
+**Code explains itself.** Prefer clear names and structure over comments. Add documentation
+only where the code's *intention* is genuinely hard to grasp — a gotcha, a non-obvious *why*
+— never restate what the code already says.
+
 ## Tooling by stack
 
 - **Python** — `pytest` + `pytest-bdd`; features in `tests/behavior/features/`, step defs in

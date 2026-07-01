@@ -10,6 +10,9 @@ multiplies the later you catch it — and a vague ask becomes generated code tha
 you meant. So pin **what to build and why** as an **executable spec** before any code: it is
 the source of truth for "done," and it becomes the test.
 
+**No internal planning docs.** Don't stash intent in private planning files (e.g.
+`.claude/plan`) — capture it *as the feature spec*: a sharable, living artifact.
+
 ## Write the feature spec (Gherkin)
 
 - **Standard location**: `tests/behavior/features/<name>.feature` — one feature per file,

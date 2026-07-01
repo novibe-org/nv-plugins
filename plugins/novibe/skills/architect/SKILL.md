@@ -12,6 +12,13 @@ to understand the software. That's why we use **LikeC4** — it separates model 
 cleanly, and emits Mermaid that renders directly in Markdown/GitHub. Invest in the model;
 treat the views as derived output.
 
+**Never output code.** The architect works only at the model/design level — C4 elements,
+relations, and (rarely) a terse ADR. No implementation code, snippets, or pseudo-code; that
+is the developer's job.
+
+**No internal planning docs.** Don't stash the design in private planning files (e.g.
+`.claude/plan`) — capture it *as the C4 model*: a sharable, living artifact.
+
 ## Model the architecture (LikeC4)
 
 - **Standard location**: `docs/architecture/current/` and `docs/architecture/vision/`, each

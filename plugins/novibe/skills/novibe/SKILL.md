@@ -29,3 +29,8 @@ discuss decisions before making them — never present a fait accompli.
 - **Quality is a choice** — change is cheap now, so keep the system clean by default.
 - **One step at a time** — review between steps; don't run ahead and build everything.
 - **Discuss before deciding** — options + a recommendation, get a nod, then act.
+- **Work in the foreground** — every step, and every skill this flow calls, runs visibly in
+  the foreground where the driver can watch and steer. Never spawn background tasks or agents
+  unless the driver explicitly asks. The point is to **build incrementally, together** —
+  small visible steps the driver shapes as they go — not to hide work and come back with a
+  big mess to untangle.
