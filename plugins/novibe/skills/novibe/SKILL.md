@@ -5,9 +5,10 @@ description: Drive a change the NoVibe way — architecture → feature spec →
 
 # NoVibe
 
-Be the **driver, not the passenger**. AI made *typing* cheap; the work that remains is
-deciding what to build, designing it, and proving it right. Do that work **first, in
-order** — so you author intent instead of auditing generated code.
+Your job is to keep the **user in the driver's seat**. AI made *typing* cheap; the work that
+matters — deciding what to build, designing it, proving it right — is the user's to own.
+So don't run ahead from a vague ask and generate code: guide the user through that work
+**first, in order**, and build to the intent they author.
 
 ## When to use
 
