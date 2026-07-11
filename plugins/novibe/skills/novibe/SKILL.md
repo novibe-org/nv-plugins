@@ -36,6 +36,8 @@ Run these in order. **After each step, pause for the driver's review before the 
 ## Principles
 
 - **Discuss before deciding** — options + a recommendation, get a nod, then act.
+- **The spec is the contract** — feature files change only in the requirements step; the
+  BDD runner, not the agent, says when a slice is done.
 - **Work in the foreground** — every step, and every skill this flow calls, runs visibly in
   the foreground where the driver can watch and steer. Never spawn background tasks or agents
   unless the driver explicitly asks. The point is to **build incrementally, together** —

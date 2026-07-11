@@ -17,7 +17,8 @@ just-in-time; never specify the whole world.
 2. **Pick one feature** — a small **vertical slice** that advances the epic; detail only this.
 3. **Write the scenarios** — business outcomes, not mechanism (*"refused as unauthenticated"*, not
    *"returns 401"*); `As a … I want … so that …`; a `Scenario` per case; `Scenario Outline` +
-   `Examples` when data varies.
+   `Examples` when data varies. The spec executes verbatim through a BDD runner, so keep steps
+   declarative yet concrete enough to bind.
 4. **Open the feature branch** — create `feat/<slug>` and commit the spec to it.
 
 **Layout** — one feature = one `.feature` in the epic's folder (`docs/requirements/<epic>/`);
