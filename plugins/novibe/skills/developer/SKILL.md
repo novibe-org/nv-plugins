@@ -8,20 +8,38 @@ description: Implement a change test-first — red → green → refactor — tu
 **In:** the Gherkin spec (`docs/requirements/<epic>/<feature>.feature`) + the C4 model (`docs/architecture/current/`).
 **Out:** **working code** for the feature slice.
 
-**Prove it right** — write the test **first**, so you author the proof of correctness instead of
-auditing generated code.
+**Prove it right** — the spec itself executes, so the proof of correctness is the runner's
+report, not the agent's claim.
 
-1. **Pick the next scenario** from the spec.
-2. **Write the test, run it → RED** — confirm it fails for the *right* reason (behaviour missing,
-   not a typo).
+**The spec runs through the project's BDD runner** (cucumber-jvm, pytest-bdd, cucumber-js, …
+per stack) — the `.feature` file is what executes. Tests merely *inspired by* the spec don't
+count. No runner in the project yet? Setting it up is the first task of the first slice.
+
+**Bind to the real system** — scenarios drive the actual built artifact over its real interface
+(boot it and call it: HTTP, CLI, library entry), never a stub or a reimplementation of the
+behaviour under test. That's what makes green mean something.
+
+1. **Run the spec → RED** — every scenario reports *undefined*: that's the work list.
+2. **Pick the next scenario, write its step definitions** — **dumb, scenario-specific,
+   disposable**. Glue is machine-maintained output, not a clever reusable step library.
+   Run it → the scenario must fail for the *right* reason (behaviour missing, not broken glue).
 3. **Minimal implementation → GREEN** — only enough to pass.
-4. **Refactor** with the test green — clean up, remove duplication.
-5. **Repeat** until every scenario passes (or is left pending).
+4. **Refactor** with the scenario green — clean up, remove duplication.
+5. **Repeat** until the runner reports every scenario green (or explicitly pending).
+
+**Keep the backlog visible** — scenarios not yet built, and specs slated for a later slice, stay
+in the runner's report as **pending/todo**, never deleted or silently filtered out. An unimplemented
+requirement you can see is a backlog; one you've hidden is a lie about coverage.
+
+**The spec is read-only here** — if a scenario turns out wrong or unimplementable, stop and
+hand back to the requirements step with the driver; never bend the `.feature` file to make it
+pass.
 
 Commit the code to the `feat/<slug>` branch as you go (each green step).
 
-**What to test** — the spec's scenarios (acceptance), plus unit tests for pure functions worth
-verifying in isolation. Not everything, and never external code (libraries, frameworks, third-party APIs).
+**What to test** — the spec's scenarios (acceptance, via the runner), plus unit tests for pure
+functions worth verifying in isolation. Not everything, and never external code (libraries,
+frameworks, third-party APIs).
 
 **Follow the project's test setup** (`CLAUDE.md` / existing tests) for how tests are written and run.
 
@@ -30,5 +48,5 @@ verifying in isolation. Not everything, and never external code (libraries, fram
 
 ## Done when
 
-Every scenario in the spec is green (or explicitly pending), the suite passes, and the
-implementation is the minimum that satisfies it — no speculative code.
+The **runner reports** every scenario in the spec green (or explicitly pending), the suite
+passes, and the implementation is the minimum that satisfies it — no speculative code.
