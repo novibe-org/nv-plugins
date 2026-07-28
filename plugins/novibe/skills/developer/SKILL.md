@@ -46,7 +46,36 @@ frameworks, third-party APIs).
 **Code explains itself** — prefer clear names and structure over comments; document only where the
 *intention* is genuinely hard to grasp, never what the code already says.
 
+## Ship it
+
+The spec and architecture were already decided with the driver — opening and landing the PR is
+execution of that decision, not a new one. Once every scenario is green, keep going:
+
+1. **Open the PR** — push the branch and `gh pr create`, summarizing what changed and why, tied
+   back to the scenarios it satisfies.
+2. **Feedback is asynchronous — do not poll as if it were not.** A push doesn't make a bot
+   review, CI, or Sonar results appear instantly; they take real time (typically minutes). Wait
+   an interval matched to that before checking, don't busy-loop. This is exactly the shape a
+   background **Agent** handles well — it can wait this out without occupying the driver.
+3. **Resolve *bot and CI* feedback in a loop, not once** — fetch comments (`gh pr view
+   --comments`, inline review comments via `gh api repos/<owner>/<repo>/pulls/<n>/comments`).
+   For each finding **from a bot** (CodeRabbit or similar): verify it against the *current* code
+   (a bot's finding can be stale or wrong — confirm, don't assume), fix it or state plainly why
+   it does not apply, push, and re-fetch. Repeat until nothing actionable remains — bots respond
+   to your fixes, so one pass is never enough.
+4. **A comment from the driver — or any human reviewer — is not the same thing.** That's a
+   decision, not a finding to mechanically resolve. Stop the autonomous loop, surface it, and
+   wait for their actual direction; don't try to satisfy it on your own the way you would a bot.
+5. **Get the PR green, GitHub and SonarQube both** — check `gh pr checks`. Resolve the PR's
+   SonarQube project/key (`mcp__sonarqube__list_pull_requests`), then its quality gate
+   (`mcp__sonarqube__get_project_quality_gate_status` with `pullRequest`, not `branch`) and its
+   issues (`mcp__sonarqube__search_sonar_issues_in_projects` with `pullRequest`). Fix what's
+   reported — bugs, vulnerabilities, code smells blocking the gate — push, and recheck both.
+   Repeat until GitHub checks and the Sonar quality gate are both green.
+
 ## Done when
 
 The **runner reports** every scenario in the spec green (or explicitly pending), the suite
-passes, and the implementation is the minimum that satisfies it — no speculative code.
+passes, the implementation is the minimum that satisfies it — no speculative code — the PR is
+open, every review comment has been addressed, and both GitHub checks and the SonarQube quality
+gate are green.
