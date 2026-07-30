@@ -5,7 +5,7 @@ description: Implement a change test-first — red → green → refactor — tu
 
 # Developer
 
-**In:** the Gherkin spec (`docs/requirements/<epic>/<feature>.feature`) + the C4 model (`docs/architecture/current/`).
+**In:** the Gherkin spec (`features/<epic>/<feature>.feature`) + the C4 model (`docs/architecture/current/`).
 **Out:** **working code** for the feature slice.
 
 **Prove it right** — the spec itself executes, so the proof of correctness is the runner's

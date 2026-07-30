@@ -5,7 +5,7 @@ description: Turn a Gherkin spec into a C4 architecture model for one slice — 
 
 # Architect
 
-**In:** the Gherkin spec at `docs/requirements/<epic>/<feature>.feature`.
+**In:** the Gherkin spec at `features/<epic>/<feature>.feature`.
 **Out:** a **C4 model** at `docs/architecture/` (LikeC4).
 
 Design it right — turn the spec into a clear design. The **model is the crucial artifact**: the
