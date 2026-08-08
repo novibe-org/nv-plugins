@@ -67,9 +67,11 @@ execution of that decision, not a new one. Once every scenario is green, keep go
    (a bot's finding can be stale or wrong — confirm, don't assume), fix it or state plainly why
    it does not apply, push, and re-fetch. Repeat until nothing actionable remains — bots respond
    to your fixes, so one pass is never enough.
-5. **A comment from the driver — or any human reviewer — is not the same thing.** That's a
-   decision, not a finding to mechanically resolve. Stop the autonomous loop, surface it, and
-   wait for their actual direction; don't try to satisfy it on your own the way you would a bot.
+5. **A comment from the driver — or any human reviewer — is direction to follow.** Pause the
+   autonomous bot-fix loop and act on it: understand what they're asking and make the change.
+   Unlike a bot finding you close mechanically, it may carry a decision — so if the intent is
+   ambiguous or it reopens the spec/design, confirm before running with it. But the default is to
+   do what they asked, not to merely surface it and wait.
 6. **Get the PR green, GitHub and SonarQube both** — check `gh pr checks`. Resolve the PR's
    SonarQube project/key (`mcp__sonarqube__list_pull_requests`), then its quality gate
    (`mcp__sonarqube__get_project_quality_gate_status` with `pullRequest`, not `branch`) and its
