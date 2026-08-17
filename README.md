@@ -24,9 +24,9 @@ A guided flow, plus the specialists it runs — each also usable on its own:
 
 | Invoke | What it does for you |
 |---|---|
-| **`novibe`** | drives a change end to end — design → spec → tests — one step at a time |
-| **`architect`** | turns an idea into a clear C4 design (and a terse ADR only when it matters) |
+| **`novibe`** | drives a change end to end — spec → design → tests — one step at a time |
 | **`requirements-engineer`** | pins *what* to build as business scenarios you can read and test |
+| **`architect`** | turns the spec into a clear C4 design (and a terse ADR only when it matters) |
 | **`developer`** | builds it test-first — red → green — so it's proven, not hoped |
 
 ## 📦 Install
@@ -41,8 +41,8 @@ A guided flow, plus the specialists it runs — each also usable on its own:
 Ask Claude to build something **the NoVibe way** (or invoke `novibe`). It walks the flow one
 step at a time and **pauses for your call between steps** — you shape every decision:
 
-1. **Design** it in the architecture model.
-2. **Specify** it as business scenarios.
+1. **Specify** it as business scenarios.
+2. **Design** it in the architecture model.
 3. **Build** it test-first.
 
 Only need one part? Invoke `architect`, `requirements-engineer`, or `developer` directly.
