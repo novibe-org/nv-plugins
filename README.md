@@ -4,6 +4,8 @@
 
 ### Be the driver, not the passenger.
 
+**Spec-driven development for Claude Code.**
+
 *AI made writing code cheap. The work that matters — deciding what to build, designing it,
 proving it right — didn't change. **NoVibe makes you do it first.***
 
@@ -16,7 +18,9 @@ proving it right — didn't change. **NoVibe makes you do it first.***
 ---
 
 > **Vibe coding:** describe it, ship it, audit what the machine made. Trapped in review hell.
-> **NoVibe:** shape the work — design, specify, prove — then let the machine fill it in.
+> **NoVibe:** spec-driven — you author the spec and the design; the machine builds to them, and
+> the **executable spec proves it**. The `.feature` file isn't documentation of the code; the
+> code is an implementation of the spec.
 
 ## ✨ What you get
 
@@ -24,9 +28,9 @@ A guided flow, plus the specialists it runs — each also usable on its own:
 
 | Invoke | What it does for you |
 |---|---|
-| **`novibe`** | drives a change end to end — design → spec → tests — one step at a time |
-| **`architect`** | turns an idea into a clear C4 design (and a terse ADR only when it matters) |
+| **`novibe`** | drives a change end to end — spec → design → tests — one step at a time |
 | **`requirements-engineer`** | pins *what* to build as business scenarios you can read and test |
+| **`architect`** | turns the spec into a clear C4 design (and a terse ADR only when it matters) |
 | **`developer`** | builds it test-first — red → green — so it's proven, not hoped |
 
 ## 📦 Install
@@ -38,15 +42,31 @@ A guided flow, plus the specialists it runs — each also usable on its own:
 
 ## 🚀 Use
 
-Ask Claude to build something **the NoVibe way** (or invoke `novibe`). It walks the flow one
-step at a time and **pauses for your call between steps** — you shape every decision:
+Ask Claude to build something **the NoVibe way** (or invoke `novibe`). It walks the
+spec-driven flow one step at a time and **pauses for your call between steps** — the spec and
+the model are the contract; code is their consequence:
 
-1. **Design** it in the architecture model.
-2. **Specify** it as business scenarios.
+1. **Specify** it as business scenarios.
+2. **Design** it in the architecture model.
 3. **Build** it test-first.
 
-Only need one part? Invoke `architect`, `requirements-engineer`, or `developer` directly.
+Only need one part? Invoke `requirements-engineer`, `architect`, or `developer` directly.
 Skip NoVibe for trivial edits.
+
+## 🪝 Guard rails (optional, recommended)
+
+Working agentic means fast merges and machine-written diffs — two failure modes worth blocking
+mechanically. This repo ships the pre-push hook we use ourselves
+([`.githooks/pre-push`](.githooks/pre-push)); copy it into your project and activate per clone:
+
+```
+git config core.hooksPath .githooks
+```
+
+- **Merged-PR guard** — refuses pushing to a branch whose PR is already merged or closed
+  (orphaned commits; happens constantly when the driver merges fast).
+- **Comment budget** — refuses diffs with more than a handful of added `//` comment lines
+  (agents drift toward narrating comments; deliberate exceptions push with `ALLOW_COMMENTS=1`).
 
 <div align="center">
 

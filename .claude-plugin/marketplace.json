@@ -8,7 +8,7 @@
     {
       "name": "novibe",
       "source": "./plugins/novibe",
-      "description": "NoVibe — be the driver, not the passenger: architecture → feature spec → TDD as orchestrated skills."
+      "description": "NoVibe — be the driver, not the passenger: feature spec → architecture → TDD as orchestrated skills."
     }
   ]
 }
