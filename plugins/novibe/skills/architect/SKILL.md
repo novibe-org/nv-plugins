@@ -36,8 +36,9 @@ why we use **LikeC4**: it separates model and view, and emits Mermaid that rende
 3. **Agree, regenerate, commit** — iterate on the `.c4` with the driver; when you both agree it's
    settled, regenerate diagrams (`likec4 export markdown` for a browsable per-project README if
    your `likec4` has it — check `likec4 export --help`, it may still be pending release — else
-   `pnpm gen:diagrams`) and commit the model to the `feat/<slug>` branch. Never hand-edit a
-   generated file.
+   `pnpm gen:diagrams`), commit the model to the `feat/<slug>` branch **and push** — the branch
+   carries the slice's draft PR, and the step isn't closed until it's on the remote. Never
+   hand-edit a generated file.
 4. **ADR only if warranted** — a crucial cross-cutting decision (integration pattern,
    security/boundary invariant, build-vs-reuse, repo structure): terse MADR-lite (~30–40 lines),
    next number in `docs/adrs/`. Default to none; never package a feature as an ADR. Same rule

@@ -19,7 +19,10 @@ just-in-time; never specify the whole world.
    *"returns 401"*); `As a … I want … so that …`; a `Scenario` per case; `Scenario Outline` +
    `Examples` when data varies. The spec executes verbatim through a BDD runner, so keep steps
    declarative yet concrete enough to bind.
-4. **Open the feature branch** — create `feat/<slug>` and commit the spec to it.
+4. **Open the feature branch and its draft PR** — create `feat/<slug>`, commit the spec, push,
+   and open a **draft PR** (`gh pr create --draft`) titled for the slice. The draft is the slice's
+   container from minute one: the spec is a reviewable diff immediately, later steps push the same
+   branch, and the PR stays draft until the developer step proves the slice.
 
 **Layout** — specs live in `features/` at the **repo root**, next to `src/` — not under `docs/`.
 They are executable source, not prose; the BDD runners of every ecosystem look there by convention.

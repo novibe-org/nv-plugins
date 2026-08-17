@@ -44,35 +44,43 @@ frameworks, third-party APIs).
 **Follow the project's test setup** (`CLAUDE.md` / existing tests) for how tests are written and run.
 
 **Code explains itself** — prefer clear names and structure over comments; document only where the
-*intention* is genuinely hard to grasp, never what the code already says.
+*intention* is genuinely hard to grasp, never what the code already says. **Before opening the PR,
+sweep your own diff for comments** (`git diff | grep '^+.*//'` or the stack's equivalent): every
+surviving comment must state a constraint the code cannot express — delete the rest. Agents drift
+toward narrating comments even when told not to; the sweep is part of done, like running the tests.
 
 ## Ship it
 
 The spec and architecture were already decided with the driver — opening and landing the PR is
 execution of that decision, not a new one. Once every scenario is green, keep going:
 
-1. **Open the PR** — push the branch and `gh pr create`, summarizing what changed and why, tied
-   back to the scenarios it satisfies.
-2. **Once pushed, iterate with new commits — never force-push a branch under review.** Fold every
+1. **Flip the slice's draft PR to ready** (`gh pr ready`) — it has carried the spec and model
+   since the requirements step; update its description to summarize what changed and why, tied
+   back to the scenarios it satisfies. (No draft exists? Open the PR now — then fix the earlier
+   steps' habit.)
+2. **Before every follow-up push, check the PR's state** (`gh pr view --json state`): drivers
+   merge fast, and pushing to a MERGED/CLOSED branch orphans the commits. Once merged, follow-up
+   work starts on a fresh branch off the updated default branch — never the old PR branch.
+3. **Once pushed, iterate with new commits — never force-push a branch under review.** Fold every
    follow-up (review fixes, CI fixes, cleanups) in as a *fresh* commit and push normally; don't
    `amend`/`rebase`/force-push, or the driver loses the incremental diff and can't see what
    changed since they last looked. Squashing history is the driver's call at merge, not yours.
-3. **Feedback is asynchronous — do not poll as if it were not.** A push doesn't make a bot
+4. **Feedback is asynchronous — do not poll as if it were not.** A push doesn't make a bot
    review, CI, or Sonar results appear instantly; they take real time (typically minutes). Wait
    an interval matched to that before checking, don't busy-loop. This is exactly the shape a
    background **Agent** handles well — it can wait this out without occupying the driver.
-4. **Resolve *bot and CI* feedback in a loop, not once** — fetch comments (`gh pr view
+5. **Resolve *bot and CI* feedback in a loop, not once** — fetch comments (`gh pr view
    --comments`, inline review comments via `gh api repos/<owner>/<repo>/pulls/<n>/comments`).
    For each finding **from a bot** (CodeRabbit or similar): verify it against the *current* code
    (a bot's finding can be stale or wrong — confirm, don't assume), fix it or state plainly why
    it does not apply, push, and re-fetch. Repeat until nothing actionable remains — bots respond
    to your fixes, so one pass is never enough.
-5. **A comment from the driver — or any human reviewer — is direction to follow.** Pause the
+6. **A comment from the driver — or any human reviewer — is direction to follow.** Pause the
    autonomous bot-fix loop and act on it: understand what they're asking and make the change.
    Unlike a bot finding you close mechanically, it may carry a decision — so if the intent is
    ambiguous or it reopens the spec/design, confirm before running with it. But the default is to
    do what they asked, not to merely surface it and wait.
-6. **Get the PR green, GitHub and SonarQube both** — check `gh pr checks`. Resolve the PR's
+7. **Get the PR green, GitHub and SonarQube both** — check `gh pr checks`. Resolve the PR's
    SonarQube project/key (`mcp__sonarqube__list_pull_requests`), then its quality gate
    (`mcp__sonarqube__get_project_quality_gate_status` with `pullRequest`, not `branch`) and its
    issues (`mcp__sonarqube__search_sonar_issues_in_projects` with `pullRequest`). Fix what's
