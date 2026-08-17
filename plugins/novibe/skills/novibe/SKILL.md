@@ -50,9 +50,10 @@ each step** — this is where they decide. Step 3 executes what was decided.
 
 ## Principles
 
-- **Every step lands pushed** — requirements, architecture, each settled revision: the closing
-  commit ends with a push. The remote is where the driver follows; local-only step results are
-  invisible progress.
+- **Every step lands pushed, into one draft PR** — the requirements step opens a draft PR for
+  the slice; architecture and code push into it; the developer step flips it ready when the runner
+  proves the slice. One container, visible from minute one; local-only step results are invisible
+  progress.
 - **Discuss before deciding** — during requirements and architecture, options + a
   recommendation, get a nod, then act. This is where the driver's decisions live.
 - **The spec is the contract** — feature files change only in the requirements step; the

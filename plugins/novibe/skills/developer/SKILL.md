@@ -54,8 +54,10 @@ toward narrating comments even when told not to; the sweep is part of done, like
 The spec and architecture were already decided with the driver — opening and landing the PR is
 execution of that decision, not a new one. Once every scenario is green, keep going:
 
-1. **Open the PR** — push the branch and `gh pr create`, summarizing what changed and why, tied
-   back to the scenarios it satisfies.
+1. **Flip the slice's draft PR to ready** (`gh pr ready`) — it has carried the spec and model
+   since the requirements step; update its description to summarize what changed and why, tied
+   back to the scenarios it satisfies. (No draft exists? Open the PR now — then fix the earlier
+   steps' habit.)
 2. **Before every follow-up push, check the PR's state** (`gh pr view --json state`): drivers
    merge fast, and pushing to a MERGED/CLOSED branch orphans the commits. Once merged, follow-up
    work starts on a fresh branch off the updated default branch — never the old PR branch.
