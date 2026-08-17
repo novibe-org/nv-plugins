@@ -50,8 +50,23 @@ the model are the contract; code is their consequence:
 2. **Design** it in the architecture model.
 3. **Build** it test-first.
 
-Only need one part? Invoke `architect`, `requirements-engineer`, or `developer` directly.
+Only need one part? Invoke `requirements-engineer`, `architect`, or `developer` directly.
 Skip NoVibe for trivial edits.
+
+## 🪝 Guard rails (optional, recommended)
+
+Working agentic means fast merges and machine-written diffs — two failure modes worth blocking
+mechanically. This repo ships the pre-push hook we use ourselves
+([`.githooks/pre-push`](.githooks/pre-push)); copy it into your project and activate per clone:
+
+```
+git config core.hooksPath .githooks
+```
+
+- **Merged-PR guard** — refuses pushing to a branch whose PR is already merged or closed
+  (orphaned commits; happens constantly when the driver merges fast).
+- **Comment budget** — refuses diffs with more than a handful of added `//` comment lines
+  (agents drift toward narrating comments; deliberate exceptions push with `ALLOW_COMMENTS=1`).
 
 <div align="center">
 
