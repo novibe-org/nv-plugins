@@ -5,8 +5,16 @@ description: Implement a change test-first — red → green → refactor — tu
 
 # Developer
 
-**In:** the Gherkin spec (`features/<epic>/<feature>.feature`) + the C4 model (`docs/architecture/current/`).
+**In:** the Gherkin spec (`features/<epic>/<feature>.feature`), the C4 model
+(`docs/architecture/current/`), and the ADRs that constrain the slice (`docs/adrs/`).
 **Out:** **working code** for the feature slice.
+
+**The artifacts are the contract — not the prompt.** Whoever hands you the slice points at the
+spec, the model and the ADRs; they don't restate the decisions in prose. Where a prompt (or a
+memory, or an earlier plan) conflicts with an artifact, **the artifact wins** — it is the
+version that was reviewed. Read them before writing code, and if they are missing, contradictory,
+or silent on something you need, **stop and report** rather than deciding it yourself: choosing
+is the requirements/architecture step's job, not yours.
 
 **Prove it right** — the spec itself executes, so the proof of correctness is the runner's
 report, not the agent's claim.

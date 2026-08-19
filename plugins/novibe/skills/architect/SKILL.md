@@ -6,7 +6,9 @@ description: Turn a Gherkin spec into a C4 architecture model for one slice — 
 # Architect
 
 **In:** the Gherkin spec at `features/<epic>/<feature>.feature`.
-**Out:** a **C4 model** at `docs/architecture/` (LikeC4).
+**Out:** a **C4 model** at `docs/architecture/` (LikeC4) — plus, only when a crucial
+cross-cutting decision was actually made, one terse ADR in `docs/adrs/`. Model and ADR together
+are what the developer step is handed.
 
 Design it right — turn the spec into a clear design. The **model is the crucial artifact**: the
 source of truth that carries the architecture into implementation and into the agent's context.

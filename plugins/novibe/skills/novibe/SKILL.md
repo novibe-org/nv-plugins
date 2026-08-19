@@ -56,6 +56,10 @@ each step** — this is where they decide. Step 3 executes what was decided.
   local-only step results are invisible progress.
 - **Discuss before deciding** — during requirements and architecture, options + a
   recommendation, get a nod, then act. This is where the driver's decisions live.
+- **Hand over artifacts, not briefings** — when the developer step runs (especially as a
+  background agent), point it at the spec, the C4 model and the ADRs; never re-explain the
+  decisions in prose. A prompt that restates a decision can go stale the moment the driver
+  changes one — and then the agent builds the superseded plan.
 - **The spec is the contract** — feature files change only in the requirements step; the
   BDD runner, not the agent, says when a slice is done.
 - **Specification runs in the foreground; execution does not have to.** Requirements and
