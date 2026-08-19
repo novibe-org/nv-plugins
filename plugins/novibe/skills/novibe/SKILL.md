@@ -34,6 +34,13 @@ explicit yes** first. Talking yourself out of it ("no real architecture change",
 project doesn't do specs", "it's trivial") is the exact vibe-coding drift this skill exists to
 stop.
 
+**Keep a skip-ledger, and expect to be audited.** Every skip — a step, the whole flow, a
+"small" UI feature built straight from chat — gets one ledger line: what was skipped, why, and
+the driver's yes. When the driver asks "are you using this flow?", recite the ledger honestly
+rather than defending the drift. And invoke each step's skill every time, not just when the
+work feels novel — the checklists catch what freehand misses (a freehanded architecture step is
+how ADR-shaped decisions end up buried in epics).
+
 **Absence is not permission to skip.** No C4 model, no feature spec, no tests yet → that means
 **create the first one**, not bypass the step.
 
