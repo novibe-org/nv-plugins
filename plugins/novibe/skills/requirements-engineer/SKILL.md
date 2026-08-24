@@ -19,6 +19,22 @@ just-in-time; never specify the whole world.
    *"returns 401"*); `As a … I want … so that …`; a `Scenario` per case; `Scenario Outline` +
    `Examples` when data varies. The spec executes verbatim through a BDD runner, so keep steps
    declarative yet concrete enough to bind.
+
+   **One scenario per choice — and one for every choice.** A scenario earns its place when someone
+   could have decided it differently: that search reaches every page, that a category is a place
+   rather than a filter. Anything that follows *necessarily* from a scenario already written is
+   not a second scenario, it is the same decision restated — cut it, or the spec reads as ceremony
+   and the driver stops reading it. The rule runs the other way too, and that half is easier to
+   miss: **if something a user will notice has no scenario, that is a missing requirement, not a
+   detail to settle in code.** Both failures look like judgement in the moment; together they make
+   the spec's size arbitrary, which is worse than either.
+
+   **Scale the asking to the change, not only the writing.** A single control usually contains one
+   choice, and a scenario or two settles it — interviewing the driver about it is ceremony. A
+   change that redraws how something is found or used contains several, most of which the driver
+   has a view on and you cannot infer: ask them, one at a time, *before* writing the spec. The
+   tell is noticing yourself pick a default — that is a question you skipped, and it will surface
+   later as something built that nobody chose.
 4. **Open the feature branch and its draft PR** — create `feat/<slug>`, commit the spec, push,
    and open a **draft PR** (`gh pr create --draft`) titled for the slice. The draft is the slice's
    container from minute one: the spec is a reviewable diff immediately, later steps push the same
